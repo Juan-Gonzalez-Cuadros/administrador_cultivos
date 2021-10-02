@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-//import 'package:administrador_cultivos/correo/inbox.dart';
+import 'package:administrador_cultivos/correo/inbox.dart';
 
 import 'providers/detalles_provider.dart';
 
@@ -18,11 +18,11 @@ class HomePage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              /*Navigator.of(context).push(
+              Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) => MailList()),
-              );*/
+              );
             },
-            icon: Icon(Icons.airplane_ticket),
+            icon: Icon(Icons.mail),
             tooltip: "Correo",
           ),
         ],
