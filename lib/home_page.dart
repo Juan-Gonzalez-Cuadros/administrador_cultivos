@@ -21,7 +21,7 @@ class HomePage extends StatelessWidget {
 
               // Gridview con 3 cuadros
               crossAxisCount: 3,
-              children: List.generate(30, (index) {
+              children: List.generate(20, (index) {
                 // 30 -> (List.count / 3)
                 // Caracteristicas de las tarjetas del Grid
                 return Card(
