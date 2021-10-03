@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:administrador_cultivos/correo/inbox.dart';
 
 import 'providers/detalles_provider.dart';
 
@@ -14,6 +15,17 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text("Lista de Cultivos"),
         backgroundColor: Colors.green,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => MailList()),
+              );
+            },
+            icon: Icon(Icons.mail),
+            tooltip: "Correo",
+          ),
+        ],
       ),
       body: Consumer<DetallesProvider>(
         builder: (context, prodsProv, child) {
