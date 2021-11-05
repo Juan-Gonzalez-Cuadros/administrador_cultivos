@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:administrador_cultivos/respositories/detalles.dart';
+import 'package:administrador_cultivos/detalles.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:administrador_cultivos/correo/inbox.dart';
