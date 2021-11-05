@@ -30,6 +30,24 @@
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
+
+  <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.5.0/firebase-storage.js"></script>
+  
+  <script>
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyCHsqe9k-VFeJh_3VHyOl1aEg5vgE18w78",
+  authDomain: "test-bff79.firebaseapp.com",
+  projectId: "test-bff79",
+  storageBucket: "test-bff79.appspot.com",
+  messagingSenderId: "468798331551",
+  appId: "1:468798331551:web:3e3c1b22e0c0391ff620aa",
+  measurementId: "G-HYWTDPGZ09"
+};
+firebase.initializeApp(firebaseConfig);
+  </script>
   <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->

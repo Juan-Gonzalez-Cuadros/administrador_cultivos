@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "468798331551",
+    "project_id": "test-bff79",
+    "storage_bucket": "test-bff79.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:468798331551:android:568be2cec9f1337cf620aa",
+        "android_client_info": {
+          "package_name": "com.example.administrador_cultivos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "468798331551-61jlpkrom22901v93l2fj0j4iaahvvra.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFKQk0NvCKw4FIL4kT49_8_BHmMtvkHXk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "468798331551-61jlpkrom22901v93l2fj0j4iaahvvra.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
