@@ -2,12 +2,12 @@ import 'package:equatable/equatable.dart';
 
 import 'detalles.dart';
 
-class Messages extends Equatable {
+class Arbol extends Equatable {
   final List<Detalles>? detalles;
 
-  const Messages({this.detalles});
+  const Arbol({this.detalles});
 
-  factory Messages.fromJson(Map<String, dynamic> json) => Messages(
+  factory Arbol.fromJson(Map<String, dynamic> json) => Arbol(
         detalles: (json['detalles'] as List<dynamic>?)
             ?.map((e) => Detalles.fromJson(e as Map<String, dynamic>))
             .toList(),
@@ -17,10 +17,10 @@ class Messages extends Equatable {
         'detalles': detalles?.map((e) => e.toJson()).toList(),
       };
 
-  Messages copyWith({
+  Arbol copyWith({
     List<Detalles>? detalles,
   }) {
-    return Messages(
+    return Arbol(
       detalles: detalles ?? this.detalles,
     );
   }
