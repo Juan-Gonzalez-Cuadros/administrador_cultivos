@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1090602114263",
+    "project_id": "proyecto-cultivos",
+    "storage_bucket": "proyecto-cultivos.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1090602114263:android:16bf5d02ecfe6200692492",
+        "android_client_info": {
+          "package_name": "com.example.administrador_cultivos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1090602114263-kt2pc6m35m87tm01rbqr86823er9hs37.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.administrador_cultivos",
+            "certificate_hash": "f33e82a2ad06caaeb81993312af4ec848b963709"
+          }
+        },
+        {
+          "client_id": "1090602114263-vggv1dm2qt0a3vkbjclp7poprpac2ehf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0mxl8ZUn9AaIXcjviGHhKUgkBB1K0Q4M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1090602114263-vggv1dm2qt0a3vkbjclp7poprpac2ehf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
