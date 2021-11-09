@@ -6,23 +6,46 @@ import 'package:provider/provider.dart';
 import 'home_page.dart';
 import 'providers/detalles_provider.dart';
 
-void main() {
-  runApp(MultiProvider(
-    providers: [
-      ChangeNotifierProvider<DetallesProvider>(
-        create: (context) => DetallesProvider(),
-      )
-    ],
-    child: (MyApp()),
-  ));
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:administrador_cultivos/auth_service.dart';
+import 'package:administrador_cultivos/sign_in.dart';
+import 'package:firebase_core/firebase_core.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Material App',
-      home: HomePage(),
-    );
+    return MultiProvider(
+        providers: [
+          Provider<AuthenticationService>(
+            create: (_) => AuthenticationService(FirebaseAuth.instance),
+          ),
+          StreamProvider(
+              create: (context) =>
+                  context.read<AuthenticationService>().authStateChanges,
+              initialData: null),
+          ChangeNotifierProvider<DetallesProvider>(
+            create: (context) => DetallesProvider(),
+          )
+        ],
+        child:
+            MaterialApp(title: 'Material App', home: AuthenticationWrapper()));
+  }
+}
+
+class AuthenticationWrapper extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final firebaseUser = context.watch<User?>();
+
+    if (firebaseUser != null) {
+      return HomePage();
+    }
+    return SignInPage();
   }
 }
