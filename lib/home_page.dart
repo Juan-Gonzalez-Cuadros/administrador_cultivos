@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 //import 'package:administrador_cultivos/correo/inbox.dart';
 import 'package:administrador_cultivos/correo_url.dart';
 
+import 'detalles.dart';
 import 'providers/detalles_provider.dart';
 
 class HomePage extends StatelessWidget {
@@ -75,12 +76,20 @@ class HomePage extends StatelessWidget {
                           // Texto con nombre de cultivo
                           Padding(
                             padding: EdgeInsets.all(2.0),
-                            child: Text(
-                              "$index", //"$index" -> prodsProv.name
-                              style: TextStyle(
-                                fontSize: 16.0,
-                                color: Colors.green,
+                            child: TextButton(
+                              child: Text(
+                                "$index", //"$index" -> prodsProv.name
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                  color: Colors.green,
+                                ),
                               ),
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Detalles()));
+                              },
                             ),
                           ),
                         ],
