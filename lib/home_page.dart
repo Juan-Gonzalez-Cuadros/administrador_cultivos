@@ -7,6 +7,7 @@ import 'package:administrador_cultivos/correo_url.dart';
 
 import 'detalles.dart';
 import 'providers/detalles_provider.dart';
+import 'package:administrador_cultivos/auth_service.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -91,6 +92,12 @@ class HomePage extends StatelessWidget {
                                         builder: (context) => Detalles()));
                               },
                             ),
+                          ),
+                          RaisedButton(
+                            onPressed: () {
+                              context.read<AuthenticationService>().signOut();
+                            },
+                            child: Text("Sign out"),
                           ),
                         ],
                       )),
