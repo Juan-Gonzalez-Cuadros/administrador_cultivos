@@ -3,9 +3,12 @@
 import 'package:administrador_cultivos/detalles.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:administrador_cultivos/correo/inbox.dart';
+//import 'package:administrador_cultivos/correo/inbox.dart';
+import 'package:administrador_cultivos/correo_url.dart';
 
+import 'detalles.dart';
 import 'providers/detalles_provider.dart';
+import 'package:administrador_cultivos/auth_service.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -17,7 +20,7 @@ class HomePage extends StatelessWidget {
         title: Text("Lista de Cultivos"),
         backgroundColor: Colors.green,
         actions: [
-          IconButton(
+          /*IconButton(
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) => MailList()),
@@ -25,6 +28,15 @@ class HomePage extends StatelessWidget {
             },
             icon: Icon(Icons.mail),
             tooltip: "Correo",
+          ),*/
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => Mail()),
+              );
+            },
+            icon: Icon(Icons.mail_rounded),
+            tooltip: "Enviar Email",
           ),
         ],
       ),
@@ -81,6 +93,12 @@ class HomePage extends StatelessWidget {
                                         builder: (context) => Detalles()));
                               },
                             ),
+                          ),
+                          RaisedButton(
+                            onPressed: () {
+                              context.read<AuthenticationService>().signOut();
+                            },
+                            child: Text("Sign out"),
                           ),
                         ],
                       )),

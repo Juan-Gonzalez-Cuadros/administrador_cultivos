@@ -1,41 +1,34 @@
 {
   "project_info": {
-    "project_number": "1090602114263",
-    "project_id": "proyecto-cultivos",
-    "storage_bucket": "proyecto-cultivos.appspot.com"
+    "project_number": "326361715167",
+    "firebase_url": "https://test-db189-default-rtdb.firebaseio.com",
+    "project_id": "test-db189",
+    "storage_bucket": "test-db189.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1090602114263:android:16bf5d02ecfe6200692492",
+        "mobilesdk_app_id": "1:326361715167:android:ec66844a33c7df6ca3346a",
         "android_client_info": {
           "package_name": "com.example.administrador_cultivos"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1090602114263-kt2pc6m35m87tm01rbqr86823er9hs37.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.administrador_cultivos",
-            "certificate_hash": "f33e82a2ad06caaeb81993312af4ec848b963709"
-          }
-        },
-        {
-          "client_id": "1090602114263-vggv1dm2qt0a3vkbjclp7poprpac2ehf.apps.googleusercontent.com",
+          "client_id": "326361715167-1gqggbepa0cmbpcohip16jocqbic5da0.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC0mxl8ZUn9AaIXcjviGHhKUgkBB1K0Q4M"
+          "current_key": "AIzaSyBEWAL6uvU0AKP_HZoQ_VyswfA8dUCz3QQ"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1090602114263-vggv1dm2qt0a3vkbjclp7poprpac2ehf.apps.googleusercontent.com",
+              "client_id": "326361715167-1gqggbepa0cmbpcohip16jocqbic5da0.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
