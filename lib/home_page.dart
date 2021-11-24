@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:administrador_cultivos/detalles.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 //import 'package:administrador_cultivos/correo/inbox.dart';
@@ -45,8 +46,8 @@ class HomePage extends StatelessWidget {
 
               // Gridview con 3 cuadros
               crossAxisCount: 3,
-              children: List.generate(30, (index) {
-                // 30 -> (List.count / 3)
+              children: List.generate(20, (index) {
+                // 20 -> (List.count / 3)
                 // Caracteristicas de las tarjetas del Grid
                 return Card(
                   elevation: 10.0,
