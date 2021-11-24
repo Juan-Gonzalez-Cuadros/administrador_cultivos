@@ -1,14 +1,10 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'home_page.dart';
 import 'providers/detalles_provider.dart';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:administrador_cultivos/auth_service.dart';
-import 'package:administrador_cultivos/sign_in.dart';
+import 'package:administrador_cultivos/sign_up.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 Future<void> main() async {
@@ -46,6 +42,6 @@ class AuthenticationWrapper extends StatelessWidget {
     if (firebaseUser != null) {
       return HomePage();
     }
-    return SignInPage();
+    return SignUpPage();
   }
 }

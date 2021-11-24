@@ -1,34 +1,33 @@
 {
   "project_info": {
-    "project_number": "326361715167",
-    "firebase_url": "https://test-db189-default-rtdb.firebaseio.com",
-    "project_id": "test-db189",
-    "storage_bucket": "test-db189.appspot.com"
+    "project_number": "68892408201",
+    "project_id": "cultivos-6445b",
+    "storage_bucket": "cultivos-6445b.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:326361715167:android:ec66844a33c7df6ca3346a",
+        "mobilesdk_app_id": "1:68892408201:android:8eb35578efb0032c354958",
         "android_client_info": {
           "package_name": "com.example.administrador_cultivos"
         }
       },
       "oauth_client": [
         {
-          "client_id": "326361715167-1gqggbepa0cmbpcohip16jocqbic5da0.apps.googleusercontent.com",
+          "client_id": "68892408201-3hhacj0fstn8q9bis9sfn6o1jua28kt5.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBEWAL6uvU0AKP_HZoQ_VyswfA8dUCz3QQ"
+          "current_key": "AIzaSyBVOlJ2b1fRad8RQk-r3kpU_dx1mpEDYZs"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "326361715167-1gqggbepa0cmbpcohip16jocqbic5da0.apps.googleusercontent.com",
+              "client_id": "68892408201-3hhacj0fstn8q9bis9sfn6o1jua28kt5.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

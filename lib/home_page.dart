@@ -3,10 +3,7 @@
 import 'package:administrador_cultivos/detalles.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-//import 'package:administrador_cultivos/correo/inbox.dart';
 import 'package:administrador_cultivos/correo_url.dart';
-
-import 'detalles.dart';
 import 'providers/detalles_provider.dart';
 import 'package:administrador_cultivos/auth_service.dart';
 
@@ -20,15 +17,6 @@ class HomePage extends StatelessWidget {
         title: Text("Lista de Cultivos"),
         backgroundColor: Colors.green,
         actions: [
-          /*IconButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => MailList()),
-              );
-            },
-            icon: Icon(Icons.mail),
-            tooltip: "Correo",
-          ),*/
           IconButton(
             onPressed: () {
               Navigator.of(context).push(
@@ -38,6 +26,38 @@ class HomePage extends StatelessWidget {
             icon: Icon(Icons.mail_rounded),
             tooltip: "Enviar Email",
           ),
+          RaisedButton(
+            onPressed: () async {
+              context.read<AuthenticationService>().signOut();
+              //await signUp();
+            },
+            child: Text(
+              "Sign Out",
+              style: TextStyle(color: Colors.black),
+            ),
+          ), /*
+          RaisedButton(
+            onPressed: () async {
+              await signIn();
+              await checkAuth();
+              //await signUp();
+            },
+            child: Text(
+              "Sign In",
+              style: TextStyle(color: Colors.black),
+            ),
+          ),
+          RaisedButton(
+            onPressed: () async {
+              await signUp();
+              await checkAuth();
+              //await signUp();
+            },
+            child: Text(
+              "Sign Up",
+              style: TextStyle(color: Colors.black),
+            ),
+          ),*/
         ],
       ),
       body: Consumer<DetallesProvider>(
@@ -93,12 +113,6 @@ class HomePage extends StatelessWidget {
                                         builder: (context) => Detalles()));
                               },
                             ),
-                          ),
-                          RaisedButton(
-                            onPressed: () {
-                              context.read<AuthenticationService>().signOut();
-                            },
-                            child: Text("Sign out"),
                           ),
                         ],
                       )),
