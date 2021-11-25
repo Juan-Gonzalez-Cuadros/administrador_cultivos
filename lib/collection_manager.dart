@@ -20,4 +20,10 @@ class CollectioManager {
           'https://cdn.shopify.com/s/files/1/0326/7189/t/65/assets/pf-e820b2e0--mother-tree-forest.jpg?v=1619557558'
     });
   }
+
+  Future<void> actualizarArbol(
+      {required String id, required String estado}) async {
+    bool b = estado.toLowerCase() == 'true';
+    await _arboles.doc(id).update({'estado': b});
+  }
 }
