@@ -1,14 +1,21 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:administrador_cultivos/detalles.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:administrador_cultivos/correo_url.dart';
 import 'package:administrador_cultivos/auth_service.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final CollectionReference firebase =
+      FirebaseFirestore.instance.collection('arboles');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,68 +66,61 @@ class HomePage extends StatelessWidget {
           ),*/
           ],
         ),
-        body: GridView.count(
-
-            // Gridview con 3 cuadros
-            crossAxisCount: 3,
-            children: List.generate(20, (index) {
-              // 20 -> (List.count / 3)
-              // Caracteristicas de las tarjetas del Grid
-              return Card(
-                elevation: 15.0,
-                margin: EdgeInsets.all(2.0),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25.0)),
-                child: Align(
-                    alignment: Alignment.center,
-
-                    // Contenido de las tarjetas
-                    child: Column(
-                      children: <Widget>[
-                        // Imagen de cultivo
-                        Padding(
-                          padding: EdgeInsets.all(1.0),
-                          child: Image.network(
-                            "https://cdn.shopify.com/s/files/1/0326/7189/t/65/assets/pf-e820b2e0--mother-tree-forest.jpg?v=1619557558", // link -> prodsProv.image
-                            height: 70.0,
-                            width: 90.0,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-
-                        // SizedBox(
-                        //   height: 0.5,
-                        // ),
-
-                        // Texto con nombre de cultivo
-                        Padding(
-                          padding: EdgeInsets.all(1.0),
-                          child: TextButton(
-                            child: Text(
-                              "$index", //"$index" -> prodsProv.name
-                              style: TextStyle(
-                                fontSize: 16.0,
-                                color: Colors.green,
-                              ),
-                            ),
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Detalles()));
-                            },
-                          ),
-                        ),
-                      ],
-                    )),
+        body: StreamBuilder(
+          stream: firebase.snapshots(),
+          builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (!snapshot.hasData) {
+              return Center(
+                child: CircularProgressIndicator(
+                  color: Colors.green,
+                ),
               );
-            })));
+            }
+
+            return GridView.count(
+              crossAxisCount: 3,
+              children: snapshot.data!.docs.map((data) {
+                return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Detalles(data)));
+                    },
+                    child: Card(
+                      elevation: 15.0,
+                      margin: EdgeInsets.all(2.0),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25.0)),
+                      child: Align(
+                          alignment: Alignment.center,
+                          child: Column(
+                            children: <Widget>[
+                              Padding(
+                                padding: EdgeInsets.all(1.0),
+                                child: Image.network(
+                                  data['img'],
+                                  height: 100.0,
+                                  width: 100.0,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(1.0),
+                                child: Text(
+                                  data['id'],
+                                  style: TextStyle(
+                                    fontSize: 16.0,
+                                    color: Colors.green,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )),
+                    ));
+              }).toList(),
+            );
+          },
+        ));
   }
 }
-
-// ListView.builder(
-//             itemCount: 10,
-//             itemBuilder: (BuildContext context, int index) {
-//               return Text("Pending");
-//             },
-//           );
