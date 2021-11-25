@@ -4,7 +4,6 @@ import 'package:administrador_cultivos/detalles.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:administrador_cultivos/correo_url.dart';
-import 'providers/detalles_provider.dart';
 import 'package:administrador_cultivos/auth_service.dart';
 
 class HomePage extends StatelessWidget {
@@ -13,29 +12,29 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Lista de Cultivos"),
-        backgroundColor: Colors.green,
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => Mail()),
-              );
-            },
-            icon: Icon(Icons.mail_rounded),
-            tooltip: "Enviar Email",
-          ),
-          RaisedButton(
-            onPressed: () async {
-              context.read<AuthenticationService>().signOut();
-              //await signUp();
-            },
-            child: Text(
-              "Sign Out",
-              style: TextStyle(color: Colors.black),
+        appBar: AppBar(
+          title: Text("Lista de Cultivos"),
+          backgroundColor: Colors.green,
+          actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => Mail()),
+                );
+              },
+              icon: Icon(Icons.mail_rounded),
+              tooltip: "Enviar Email",
             ),
-          ), /*
+            RaisedButton(
+              onPressed: () async {
+                context.read<AuthenticationService>().signOut();
+                //await signUp();
+              },
+              child: Text(
+                "Sign Out",
+                style: TextStyle(color: Colors.black),
+              ),
+            ), /*
           RaisedButton(
             onPressed: () async {
               await signIn();
@@ -58,69 +57,64 @@ class HomePage extends StatelessWidget {
               style: TextStyle(color: Colors.black),
             ),
           ),*/
-        ],
-      ),
-      body: Consumer<DetallesProvider>(
-        builder: (context, prodsProv, child) {
-          return GridView.count(
+          ],
+        ),
+        body: GridView.count(
 
-              // Gridview con 3 cuadros
-              crossAxisCount: 3,
-              children: List.generate(20, (index) {
-                // 20 -> (List.count / 3)
-                // Caracteristicas de las tarjetas del Grid
-                return Card(
-                  elevation: 10.0,
-                  margin: EdgeInsets.all(8.0),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0)),
-                  child: Align(
-                      alignment: Alignment.center,
+            // Gridview con 3 cuadros
+            crossAxisCount: 3,
+            children: List.generate(20, (index) {
+              // 20 -> (List.count / 3)
+              // Caracteristicas de las tarjetas del Grid
+              return Card(
+                elevation: 15.0,
+                margin: EdgeInsets.all(2.0),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25.0)),
+                child: Align(
+                    alignment: Alignment.center,
 
-                      // Contenido de las tarjetas
-                      child: Column(
-                        children: <Widget>[
-                          // Imagen de cultivo
-                          Padding(
-                            padding: EdgeInsets.all(5.0),
-                            child: Image.network(
-                              "https://cdn.shopify.com/s/files/1/0326/7189/t/65/assets/pf-e820b2e0--mother-tree-forest.jpg?v=1619557558", // link -> prodsProv.image
-                              height: 100.0,
-                              width: 100.0,
-                              fit: BoxFit.cover,
-                            ),
+                    // Contenido de las tarjetas
+                    child: Column(
+                      children: <Widget>[
+                        // Imagen de cultivo
+                        Padding(
+                          padding: EdgeInsets.all(1.0),
+                          child: Image.network(
+                            "https://cdn.shopify.com/s/files/1/0326/7189/t/65/assets/pf-e820b2e0--mother-tree-forest.jpg?v=1619557558", // link -> prodsProv.image
+                            height: 70.0,
+                            width: 90.0,
+                            fit: BoxFit.cover,
                           ),
+                        ),
 
-                          SizedBox(
-                            height: 5.0,
-                          ),
+                        // SizedBox(
+                        //   height: 0.5,
+                        // ),
 
-                          // Texto con nombre de cultivo
-                          Padding(
-                            padding: EdgeInsets.all(2.0),
-                            child: TextButton(
-                              child: Text(
-                                "$index", //"$index" -> prodsProv.name
-                                style: TextStyle(
-                                  fontSize: 16.0,
-                                  color: Colors.green,
-                                ),
+                        // Texto con nombre de cultivo
+                        Padding(
+                          padding: EdgeInsets.all(1.0),
+                          child: TextButton(
+                            child: Text(
+                              "$index", //"$index" -> prodsProv.name
+                              style: TextStyle(
+                                fontSize: 16.0,
+                                color: Colors.green,
                               ),
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => Detalles()));
-                              },
                             ),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Detalles()));
+                            },
                           ),
-                        ],
-                      )),
-                );
-              }));
-        },
-      ),
-    );
+                        ),
+                      ],
+                    )),
+              );
+            })));
   }
 }
 
