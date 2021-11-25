@@ -6,12 +6,17 @@ class CollectioManager {
   CollectioManager(this._arboles);
 
   Future<void> agregarArbol({required String tipo}) async {
+    QuerySnapshot productCollection =
+        await FirebaseFirestore.instance.collection('arboles').get();
+    int productCount = productCollection.size;
     await _arboles.add({
       'tipo': tipo,
       'estado': true,
       'fecha': DateTime.now(),
       'abono': '',
-      'plaga': ''
+      'plaga': '',
+      'id': productCount,
+      'img': ''
     });
   }
 }
