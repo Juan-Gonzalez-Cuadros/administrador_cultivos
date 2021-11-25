@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'home_page.dart';
-import 'providers/detalles_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:administrador_cultivos/auth_service.dart';
 import 'package:administrador_cultivos/sign_up.dart';
@@ -25,9 +24,6 @@ class MyApp extends StatelessWidget {
               create: (context) =>
                   context.read<AuthenticationService>().authStateChanges,
               initialData: null),
-          ChangeNotifierProvider<DetallesProvider>(
-            create: (context) => DetallesProvider(),
-          )
         ],
         child:
             MaterialApp(title: 'Material App', home: AuthenticationWrapper()));
