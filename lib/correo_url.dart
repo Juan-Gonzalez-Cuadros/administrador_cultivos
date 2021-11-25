@@ -112,7 +112,6 @@ class _MailPageState extends State<MailPage> {
           ),
         ),
       );
-
   Widget buildButton({
     required String text,
     required VoidCallback onClicked,
