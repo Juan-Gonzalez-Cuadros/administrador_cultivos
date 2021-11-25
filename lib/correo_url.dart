@@ -13,7 +13,10 @@ class Mail extends StatelessWidget {
     return MaterialApp(
       title: _title,
       home: Scaffold(
-        appBar: AppBar(title: const Text(_title)),
+        appBar: AppBar(
+          title: const Text(_title),
+          backgroundColor: Colors.green,
+        ),
         body: const MailPage(),
       ),
     );
