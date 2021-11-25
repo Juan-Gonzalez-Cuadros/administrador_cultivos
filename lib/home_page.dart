@@ -5,17 +5,82 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:administrador_cultivos/correo_url.dart';
 import 'package:administrador_cultivos/auth_service.dart';
+import 'package:administrador_cultivos/collection_manager.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+  final tipoController = TextEditingController();
+  HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final _formKey = GlobalKey<FormState>();
+
     return Scaffold(
         appBar: AppBar(
           title: Text("Lista de Cultivos"),
           backgroundColor: Colors.green,
           actions: [
+            IconButton(
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        content: Stack(
+                          overflow: Overflow.visible,
+                          children: <Widget>[
+                            Positioned(
+                              right: -40.0,
+                              top: -40.0,
+                              child: InkResponse(
+                                onTap: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: CircleAvatar(
+                                  child: Icon(Icons.close),
+                                  backgroundColor: Colors.red,
+                                ),
+                              ),
+                            ),
+                            Form(
+                              key: _formKey,
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: TextFormField(
+                                      controller: tipoController,
+                                      decoration: InputDecoration(
+                                        labelText: "Tipo de arbol a añadir",
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: RaisedButton(
+                                      child: Text("Añadir"),
+                                      onPressed: () {
+                                        context
+                                            .read<CollectioManager>()
+                                            .agregarArbol(
+                                                tipo:
+                                                    tipoController.text.trim());
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    });
+              },
+              icon: Icon(Icons.library_add),
+              tooltip: "Añadir cultivo",
+            ),
             IconButton(
               onPressed: () {
                 Navigator.of(context).push(
@@ -25,38 +90,14 @@ class HomePage extends StatelessWidget {
               icon: Icon(Icons.mail_rounded),
               tooltip: "Enviar Email",
             ),
-            RaisedButton(
+            IconButton(
               onPressed: () async {
                 context.read<AuthenticationService>().signOut();
                 //await signUp();
               },
-              child: Text(
-                "Sign Out",
-                style: TextStyle(color: Colors.black),
-              ),
-            ), /*
-          RaisedButton(
-            onPressed: () async {
-              await signIn();
-              await checkAuth();
-              //await signUp();
-            },
-            child: Text(
-              "Sign In",
-              style: TextStyle(color: Colors.black),
+              icon: Icon(Icons.logout),
+              tooltip: "Cerrar sesión",
             ),
-          ),
-          RaisedButton(
-            onPressed: () async {
-              await signUp();
-              await checkAuth();
-              //await signUp();
-            },
-            child: Text(
-              "Sign Up",
-              style: TextStyle(color: Colors.black),
-            ),
-          ),*/
           ],
         ),
         body: GridView.count(
