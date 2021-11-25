@@ -1,6 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 
 class Detalles extends StatelessWidget {
   final data;
@@ -8,6 +9,8 @@ class Detalles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Timestamp t = data['fecha'];
+    DateTime d = t.toDate();
     return Scaffold(
       appBar: AppBar(
         title: Text("Detalles de Cultivo"),
@@ -30,7 +33,7 @@ class Detalles extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                   child: Text(
-                    data['id'],
+                    "Tipo: " + data['tipo'],
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w400,
@@ -41,7 +44,28 @@ class Detalles extends StatelessWidget {
               Container(
                 padding: EdgeInsets.all(10),
                 child: Text(
-                  data['tipo'],
+                  "Activo: " + data['estado'].toString(),
+                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.normal),
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.all(10),
+                child: Text(
+                  "Fecha: " + d.toString(),
+                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.normal),
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.all(10),
+                child: Text(
+                  "Abono: " + data['abono'],
+                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.normal),
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.all(10),
+                child: Text(
+                  "Plaga: " + data['plaga'],
                   style: TextStyle(fontSize: 17, fontWeight: FontWeight.normal),
                 ),
               ),
