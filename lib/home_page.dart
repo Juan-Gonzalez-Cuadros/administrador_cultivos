@@ -148,7 +148,7 @@ class _HomePageState extends State<HomePage> {
                               Padding(
                                 padding: EdgeInsets.all(1.0),
                                 child: Text(
-                                  data['id'],
+                                  data['id'].toString() + ": " + data['tipo'],
                                   style: TextStyle(
                                     fontSize: 16.0,
                                     color: Colors.green,
