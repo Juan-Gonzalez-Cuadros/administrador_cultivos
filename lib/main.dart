@@ -5,6 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:administrador_cultivos/auth_service.dart';
 import 'package:administrador_cultivos/sign_up.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:administrador_cultivos/collection_manager.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,6 +21,10 @@ class MyApp extends StatelessWidget {
         providers: [
           Provider<AuthenticationService>(
             create: (_) => AuthenticationService(FirebaseAuth.instance),
+          ),
+          Provider<CollectioManager>(
+            create: (_) => CollectioManager(
+                FirebaseFirestore.instance.collection('arboles')),
           ),
           StreamProvider(
               create: (context) =>
