@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:administrador_cultivos/utils.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() => runApp(const Mail());
 
@@ -34,6 +34,8 @@ class MailPage extends StatefulWidget {
 class _MailPageState extends State<MailPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
+  TextEditingController emailController2 = TextEditingController();
+  TextEditingController emailController3 = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +47,31 @@ class _MailPageState extends State<MailPage> {
           TextFormField(
             controller: emailController,
             decoration: const InputDecoration(
-              hintText: 'Introduzca el contacto',
+              hintText: 'Contacto',
+            ),
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return 'Introduzca algo de texto';
+              }
+              return null;
+            },
+          ),
+          TextFormField(
+            controller: emailController2,
+            decoration: const InputDecoration(
+              hintText: 'Asunto',
+            ),
+            validator: (String? value) {
+              if (value == null || value.isEmpty) {
+                return 'Introduzca algo de texto';
+              }
+              return null;
+            },
+          ),
+          TextFormField(
+            controller: emailController3,
+            decoration: const InputDecoration(
+              hintText: 'Mensaje',
             ),
             validator: (String? value) {
               if (value == null || value.isEmpty) {
@@ -58,17 +84,23 @@ class _MailPageState extends State<MailPage> {
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
               onPressed: () {
+                launch(('mailto:' +
+                    emailController.text +
+                    '?subject=' +
+                    emailController2.text +
+                    '&body=' +
+                    emailController3.text));
                 // Validate will return true if the form is valid, or false if
                 // the form is invalid.
-                if (_formKey.currentState!.validate()) {
+                /*if (_formKey.currentState!.validate()) {
                   // Process data.
                   //print(emailController.text);
                   Utils.openEmail(
                     toEmail: emailController.text,
-                    subject: '',
-                    body: '',
+                    subject: emailController2.text,
+                    body: emailController3.text,
                   );
-                }
+                }*/
               },
               child: const Text('Abrir Email'),
             ),
@@ -78,55 +110,3 @@ class _MailPageState extends State<MailPage> {
     );
   }
 }
-
-  /*Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-        ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              buildButton(
-                text: 'Open Link',
-                onClicked: () => Utils.openLink(url: 'http://flutter.dev'),
-              ),
-              buildButton(
-                text: 'Open Email',
-                onClicked: () => Utils.openEmail(
-                  toEmail: 'example@gmail.com',
-                  subject: 'Hello World',
-                  body: 'This works great!',
-                ),
-              ),
-              buildButton(
-                text: 'Open Call',
-                onClicked: () =>
-                    Utils.openPhoneCall(phoneNumber: '+4912388128311'),
-              ),
-              buildButton(
-                text: 'Open SMS',
-                onClicked: () => Utils.openSMS(phoneNumber: '+4912388128311'),
-              ),
-            ],
-          ),
-        ),
-      );
-  Widget buildButton({
-    required String text,
-    required VoidCallback onClicked,
-  }) =>
-      Container(
-        padding: EdgeInsets.symmetric(vertical: 12),
-        child: RaisedButton(
-          shape: StadiumBorder(),
-          onPressed: onClicked,
-          color: Colors.red,
-          textColor: Colors.white,
-          child: Text(
-            text,
-            style: TextStyle(fontSize: 24),
-          ),
-        ),
-      );
-}*/
