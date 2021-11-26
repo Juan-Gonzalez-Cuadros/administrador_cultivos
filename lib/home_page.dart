@@ -15,8 +15,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final tipoController = TextEditingController();
-  final CollectionReference firebase =
-      FirebaseFirestore.instance.collection('arboles');
+  final Query<Map<String, dynamic>> firebase =
+      FirebaseFirestore.instance.collection('arboles').orderBy('id');
   @override
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
