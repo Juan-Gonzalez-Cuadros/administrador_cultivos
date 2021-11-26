@@ -1,23 +1,30 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:administrador_cultivos/collection_manager.dart';
 import 'package:provider/provider.dart';
 
-class Detalles extends StatefulWidget {
-  Detalles({Key? key}) : super(key: key);
+class Detalles extends StatelessWidget {
+  final data;
+  Detalles(this.data);
 
-  @override
-  _DetallesState createState() => _DetallesState();
-}
-
-class _DetallesState extends State<Detalles> {
-  final TextEditingController estadoController =
-      TextEditingController(text: "true");
   @override
   Widget build(BuildContext context) {
+    TextEditingController estadoController =
+        TextEditingController(text: data['estado'].toString());
+    TextEditingController abonoController =
+        TextEditingController(text: data['abono'].toString());
+    TextEditingController plagaController =
+        TextEditingController(text: data['plaga'].toString());
+    TextEditingController imgController =
+        TextEditingController(text: data['img'].toString());
+    TextEditingController tipoController =
+        TextEditingController(text: data['tipo'].toString());
+
     final _formKey = GlobalKey<FormState>();
+    Timestamp t = data['fecha'];
+    DateTime d = t.toDate();
     return Scaffold(
       appBar: AppBar(
         title: Text("Detalles de Cultivo"),
@@ -59,15 +66,42 @@ class _DetallesState extends State<Detalles> {
                                     ),
                                   ),
                                 ),
-                                /*Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: TextFormField(
-                                      controller: passwordController2,
-                                      decoration: InputDecoration(
-                                        labelText: "Password",
-                                      ),
+                                Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: TextFormField(
+                                    controller: abonoController,
+                                    decoration: InputDecoration(
+                                      labelText: "Abono",
                                     ),
-                                  ),*/
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: TextFormField(
+                                    controller: plagaController,
+                                    decoration: InputDecoration(
+                                      labelText: "Plaga",
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: TextFormField(
+                                    controller: imgController,
+                                    decoration: InputDecoration(
+                                      labelText: "Url de imagen",
+                                    ),
+                                  ),
+                                ),
+                                /*Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: TextFormField(
+                                    controller: tipoController,
+                                    decoration: InputDecoration(
+                                      labelText: "Tipo",
+                                    ),
+                                  ),
+                                ),*/
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: RaisedButton(
@@ -76,8 +110,12 @@ class _DetallesState extends State<Detalles> {
                                       context
                                           .read<CollectioManager>()
                                           .actualizarArbol(
-                                            id: '5',
+                                            id: data['id'].toString(),
                                             estado: estadoController.text,
+                                            abono: abonoController.text,
+                                            plaga: plagaController.text,
+                                            img: imgController.text,
+                                            tipo: tipoController.text,
                                           );
                                       Navigator.pop(context);
                                     },
@@ -96,46 +134,62 @@ class _DetallesState extends State<Detalles> {
           ),
         ],
       ),
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        child: Column(
-          children: [
-            //<Widget>
-            Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.green,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(40),
-                    bottomRight: Radius.circular(40),
-                  ),
-                  //image: DecorationImage(image: AssetImage("prodsProv.image")),
-                ),
+      body: ListView(
+        children: [
+          Column(
+            children: [
+              SizedBox(
+                height: 15.0,
               ),
-            ),
-            Expanded(
-              child: Container(
-                color: Colors.white,
-                //child: ListTile{
-                child: Column(
-                  //title:
-                  children: [
-                    //<Widget>
-                    Text(
-                      "Planta",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
+              Container(
+                child: Image.network(data['img']),
+              ),
+              SizedBox(
+                height: 8.0,
+              ),
+              Card(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                  child: Text(
+                    "Tipo: " + data['tipo'],
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w400,
                     ),
-                  ],
+                  ),
                 ),
-                //},
               ),
-            ),
-          ],
-        ),
+              Container(
+                padding: EdgeInsets.all(10),
+                child: Text(
+                  "Activo: " + data['estado'].toString(),
+                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.normal),
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.all(10),
+                child: Text(
+                  "Fecha: " + d.toString(),
+                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.normal),
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.all(10),
+                child: Text(
+                  "Abono: " + data['abono'],
+                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.normal),
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.all(10),
+                child: Text(
+                  "Plaga: " + data['plaga'],
+                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.normal),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
