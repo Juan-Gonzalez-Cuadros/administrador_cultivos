@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:administrador_cultivos/collection_manager.dart';
+import 'package:provider/provider.dart';
 
 class Detalles extends StatelessWidget {
   final data;
@@ -9,12 +10,129 @@ class Detalles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController estadoController =
+        TextEditingController(text: data['estado'].toString());
+    TextEditingController abonoController =
+        TextEditingController(text: data['abono'].toString());
+    TextEditingController plagaController =
+        TextEditingController(text: data['plaga'].toString());
+    TextEditingController imgController =
+        TextEditingController(text: data['img'].toString());
+    TextEditingController tipoController =
+        TextEditingController(text: data['tipo'].toString());
+
+    final _formKey = GlobalKey<FormState>();
     Timestamp t = data['fecha'];
     DateTime d = t.toDate();
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Detalles de Cultivo"),
         backgroundColor: Colors.green,
+        actions: [
+          IconButton(
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      content: Stack(
+                        overflow: Overflow.visible,
+                        children: <Widget>[
+                          Positioned(
+                            right: -40.0,
+                            top: -40.0,
+                            child: InkResponse(
+                              onTap: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: CircleAvatar(
+                                child: Icon(Icons.close),
+                                backgroundColor: Colors.red,
+                              ),
+                            ),
+                          ),
+                          Form(
+                            key: _formKey,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: TextFormField(
+                                    controller: estadoController,
+                                    decoration: InputDecoration(
+                                      labelText: "Estado",
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: TextFormField(
+                                    controller: abonoController,
+                                    decoration: InputDecoration(
+                                      labelText: "Abono",
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: TextFormField(
+                                    controller: plagaController,
+                                    decoration: InputDecoration(
+                                      labelText: "Plaga",
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: TextFormField(
+                                    controller: imgController,
+                                    decoration: InputDecoration(
+                                      labelText: "Url de imagen",
+                                    ),
+                                  ),
+                                ),
+                                /*Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: TextFormField(
+                                    controller: tipoController,
+                                    decoration: InputDecoration(
+                                      labelText: "Tipo",
+                                    ),
+                                  ),
+                                ),*/
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: RaisedButton(
+                                    child: Text("Actualizar"),
+                                    onPressed: () {
+                                      context
+                                          .read<CollectioManager>()
+                                          .actualizarArbol(
+                                            id: data['id'].toString(),
+                                            estado: estadoController.text,
+                                            abono: abonoController.text,
+                                            plaga: plagaController.text,
+                                            img: imgController.text,
+                                            tipo: tipoController.text,
+                                          );
+                                      Navigator.pop(context);
+                                    },
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  });
+            },
+            icon: Icon(Icons.edit),
+            tooltip: "Actualizar arbol",
+          ),
+        ],
       ),
       body: ListView(
         children: [
