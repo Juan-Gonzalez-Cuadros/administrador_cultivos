@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:administrador_cultivos/correo_url.dart';
 import 'package:administrador_cultivos/auth_service.dart';
-import 'package:administrador_cultivos/collection_manager.dart';
 import 'package:administrador_cultivos/image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -15,8 +14,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String imageUrl = '';
-  final tipoController = TextEditingController();
+  String imageUrl =
+      'https://cdn.shopify.com/s/files/1/0326/7189/t/65/assets/pf-e820b2e0--mother-tree-forest.jpg?v=1619557558';
   final Query<Map<String, dynamic>> firebase =
       FirebaseFirestore.instance.collection('arboles').orderBy('id');
   @override
@@ -52,43 +51,12 @@ class _HomePageState extends State<HomePage> {
                             ),
                             Form(
                               key: _formKey,
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: <Widget>[
-                                  Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: TextFormField(
-                                      controller: tipoController,
-                                      decoration: InputDecoration(
-                                        labelText: "Tipo de arbol a añadir",
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.all(8.0),
-                                    child: TreeImage(
-                                      onFileChanged: (imageUrl) {
-                                        setState(() {
-                                          this.imageUrl = imageUrl;
-                                        });
-                                      },
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: RaisedButton(
-                                      child: Text("Añadir"),
-                                      onPressed: () {
-                                        context
-                                            .read<CollectioManager>()
-                                            .agregarArbol(
-                                                tipo:
-                                                    tipoController.text.trim());
-                                        Navigator.pop(context);
-                                      },
-                                    ),
-                                  )
-                                ],
+                              child: TreeImage(
+                                onFileChanged: (imageUrl) {
+                                  setState(() {
+                                    this.imageUrl = imageUrl;
+                                  });
+                                },
                               ),
                             ),
                           ],
@@ -137,7 +105,7 @@ class _HomePageState extends State<HomePage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => Detalles(data)));
+                              builder: (context) => Detalles(data: data)));
                     },
                     child: Card(
                       elevation: 15.0,

@@ -1,28 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:administrador_cultivos/collection_manager.dart';
-import 'package:provider/provider.dart';
+import 'package:administrador_cultivos/update_image.dart';
 
-class Detalles extends StatelessWidget {
+class Detalles extends StatefulWidget {
   final data;
-  Detalles(this.data);
+
+  Detalles({required this.data});
 
   @override
-  Widget build(BuildContext context) {
-    TextEditingController estadoController =
-        TextEditingController(text: data['estado'].toString());
-    TextEditingController abonoController =
-        TextEditingController(text: data['abono'].toString());
-    TextEditingController plagaController =
-        TextEditingController(text: data['plaga'].toString());
-    TextEditingController imgController =
-        TextEditingController(text: data['img'].toString());
-    TextEditingController tipoController =
-        TextEditingController(text: data['tipo'].toString());
+  State<Detalles> createState() => _DetallesState();
+}
 
+class _DetallesState extends State<Detalles> {
+  String imageUrl = '';
+  @override
+  Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
-    Timestamp t = data['fecha'];
+    Timestamp t = widget.data['fecha'];
     DateTime d = t.toDate();
 
     return Scaffold(
@@ -54,80 +49,19 @@ class Detalles extends StatelessWidget {
                           ),
                           Form(
                             key: _formKey,
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: <Widget>[
-                                Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: TextFormField(
-                                    controller: estadoController,
-                                    decoration: InputDecoration(
-                                      labelText: "Estado",
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: TextFormField(
-                                    controller: abonoController,
-                                    decoration: InputDecoration(
-                                      labelText: "Abono",
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: TextFormField(
-                                    controller: plagaController,
-                                    decoration: InputDecoration(
-                                      labelText: "Plaga",
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: TextFormField(
-                                    controller: imgController,
-                                    decoration: InputDecoration(
-                                      labelText: "Url de imagen",
-                                    ),
-                                  ),
-                                ),
-                                /*Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: TextFormField(
-                                    controller: tipoController,
-                                    decoration: InputDecoration(
-                                      labelText: "Tipo",
-                                    ),
-                                  ),
-                                ),*/
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: RaisedButton(
-                                    child: Text("Actualizar"),
-                                    onPressed: () {
-                                      context
-                                          .read<CollectioManager>()
-                                          .actualizarArbol(
-                                            id: data['id'].toString(),
-                                            estado: estadoController.text,
-                                            abono: abonoController.text,
-                                            plaga: plagaController.text,
-                                            img: imgController.text,
-                                            tipo: tipoController.text,
-                                          );
-                                      Navigator.pop(context);
-                                    },
-                                  ),
-                                )
-                              ],
-                            ),
+                            child: UpdateTreeImage(
+                                onFileChanged: (imageUrl) {
+                                  setState(() {
+                                    this.imageUrl = imageUrl;
+                                  });
+                                },
+                                data: widget.data),
                           ),
                         ],
                       ),
                     );
                   });
+              setState(() {});
             },
             icon: Icon(Icons.edit),
             tooltip: "Actualizar arbol",
@@ -142,7 +76,7 @@ class Detalles extends StatelessWidget {
                 height: 15.0,
               ),
               Container(
-                child: Image.network(data['img']),
+                child: Image.network(widget.data['img']),
               ),
               SizedBox(
                 height: 8.0,
@@ -151,7 +85,7 @@ class Detalles extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                   child: Text(
-                    "Tipo: " + data['tipo'],
+                    "Tipo: " + widget.data['tipo'],
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w400,
@@ -162,7 +96,7 @@ class Detalles extends StatelessWidget {
               Container(
                 padding: EdgeInsets.all(10),
                 child: Text(
-                  "Activo: " + data['estado'].toString(),
+                  "Activo: " + widget.data['estado'].toString(),
                   style: TextStyle(fontSize: 17, fontWeight: FontWeight.normal),
                 ),
               ),
@@ -176,14 +110,14 @@ class Detalles extends StatelessWidget {
               Container(
                 padding: EdgeInsets.all(10),
                 child: Text(
-                  "Abono: " + data['abono'],
+                  "Abono: " + widget.data['abono'],
                   style: TextStyle(fontSize: 17, fontWeight: FontWeight.normal),
                 ),
               ),
               Container(
                 padding: EdgeInsets.all(10),
                 child: Text(
-                  "Plaga: " + data['plaga'],
+                  "Plaga: " + widget.data['plaga'],
                   style: TextStyle(fontSize: 17, fontWeight: FontWeight.normal),
                 ),
               ),

@@ -11,34 +11,58 @@ import 'package:administrador_cultivos/round_image.dart';
 import 'package:administrador_cultivos/collection_manager.dart';
 import 'package:provider/src/provider.dart';
 
-class TreeImage extends StatefulWidget {
+class UpdateTreeImage extends StatefulWidget {
   final Function(String imageUrl) onFileChanged;
+  final data;
 
-  TreeImage({
-    required this.onFileChanged,
-  });
+  UpdateTreeImage({required this.onFileChanged, required this.data});
 
   @override
-  _TreeImageState createState() => _TreeImageState();
+  _UpdateTreeImageState createState() => _UpdateTreeImageState();
 }
 
-class _TreeImageState extends State<TreeImage> {
-  final tipoController = TextEditingController();
+class _UpdateTreeImageState extends State<UpdateTreeImage> {
   final ImagePicker _picker = ImagePicker();
 
-  String? imageUrl =
-      'https://cdn.shopify.com/s/files/1/0326/7189/t/65/assets/pf-e820b2e0--mother-tree-forest.jpg?v=1619557558';
+  String? imageUrl = '';
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController estadoController =
+        TextEditingController(text: widget.data['estado'].toString());
+    TextEditingController abonoController =
+        TextEditingController(text: widget.data['abono'].toString());
+    TextEditingController plagaController =
+        TextEditingController(text: widget.data['plaga'].toString());
+    TextEditingController tipoController =
+        TextEditingController(text: widget.data['tipo'].toString());
+
     return Column(
       children: [
         Padding(
           padding: EdgeInsets.all(8.0),
           child: TextFormField(
-            controller: tipoController,
+            controller: estadoController,
             decoration: InputDecoration(
-              labelText: "Tipo de cultivo",
+              labelText: "Estado",
+            ),
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.all(8.0),
+          child: TextFormField(
+            controller: abonoController,
+            decoration: InputDecoration(
+              labelText: "Abono",
+            ),
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.all(8.0),
+          child: TextFormField(
+            controller: plagaController,
+            decoration: InputDecoration(
+              labelText: "Plaga",
             ),
           ),
         ),
@@ -50,7 +74,7 @@ class _TreeImageState extends State<TreeImage> {
             highlightColor: Colors.transparent,
             onTap: () => _selectPhoto(),
             child: AppRoundImage.url(
-              imageUrl!,
+              widget.data['img'].toString(),
               width: 80,
               height: 80,
             ),
@@ -70,10 +94,17 @@ class _TreeImageState extends State<TreeImage> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: RaisedButton(
-            child: Text("Añadir"),
+            child: Text("Actualizar"),
             onPressed: () {
-              context.read<CollectioManager>().agregarArbol(
-                  tipo: tipoController.text.trim(), img: imageUrl!);
+              if (imageUrl == '') imageUrl = widget.data['img'];
+              context.read<CollectioManager>().actualizarArbol(
+                    id: widget.data['id'].toString(),
+                    estado: estadoController.text,
+                    abono: abonoController.text,
+                    plaga: plagaController.text,
+                    img: imageUrl!,
+                    tipo: tipoController.text,
+                  );
               Navigator.pop(context);
             },
           ),
