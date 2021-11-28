@@ -1,4 +1,5 @@
 import 'package:administrador_cultivos/detalles.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:administrador_cultivos/correo_url.dart';
@@ -16,8 +17,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String imageUrl =
       'https://cdn.shopify.com/s/files/1/0326/7189/t/65/assets/pf-e820b2e0--mother-tree-forest.jpg?v=1619557558';
-  final Query<Map<String, dynamic>> firebase =
-      FirebaseFirestore.instance.collection('arboles').orderBy('id');
+  final Query<Map<String, dynamic>> firebase = FirebaseFirestore.instance
+      .collection('arboles')
+      .where('user', isEqualTo: FirebaseAuth.instance.currentUser!.uid);
   @override
   Widget build(BuildContext context) {
     final _formKey = GlobalKey<FormState>();
