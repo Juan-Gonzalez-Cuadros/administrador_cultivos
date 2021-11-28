@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:administrador_cultivos/correo_url.dart';
 import 'package:administrador_cultivos/auth_service.dart';
 import 'package:administrador_cultivos/collection_manager.dart';
+import 'package:administrador_cultivos/image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,6 +15,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  String imageUrl = '';
   final tipoController = TextEditingController();
   final Query<Map<String, dynamic>> firebase =
       FirebaseFirestore.instance.collection('arboles').orderBy('id');
@@ -60,6 +62,16 @@ class _HomePageState extends State<HomePage> {
                                       decoration: InputDecoration(
                                         labelText: "Tipo de arbol a añadir",
                                       ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: TreeImage(
+                                      onFileChanged: (imageUrl) {
+                                        setState(() {
+                                          this.imageUrl = imageUrl;
+                                        });
+                                      },
                                     ),
                                   ),
                                   Padding(
