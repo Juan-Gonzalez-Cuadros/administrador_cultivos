@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class CollectioManager {
   final CollectionReference _arboles;
@@ -20,7 +21,8 @@ class CollectioManager {
       'abono': '',
       'plaga': '',
       'id': productCount,
-      'img': img
+      'img': img,
+      'user': FirebaseAuth.instance.currentUser!.uid
     };
     arboles
         .set(myJSONObj)
