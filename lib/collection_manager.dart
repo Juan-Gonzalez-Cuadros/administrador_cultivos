@@ -47,7 +47,8 @@ class CollectioManager {
       'abono': abono,
       'plaga': plaga,
       'id': id,
-      'img': img
+      'img': img,
+      'user': FirebaseAuth.instance.currentUser!.uid
     };
     arboles
         .set(myJSONObj)
