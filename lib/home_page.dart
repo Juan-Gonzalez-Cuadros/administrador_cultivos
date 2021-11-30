@@ -121,7 +121,8 @@ class _HomePageState extends State<HomePage> {
                       },
                       child: Card(
                         elevation: 15.0,
-                        margin: EdgeInsets.all(2.0),
+                        margin: EdgeInsets.all(1.0),
+                        color: Colors.green,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(25.0)),
                         child: Align(
@@ -133,7 +134,7 @@ class _HomePageState extends State<HomePage> {
                                   child: Image.network(
                                     data['img'],
                                     height: 100.0,
-                                    width: 100.0,
+                                    width: 125.0,
                                     fit: BoxFit.cover,
                                   ),
                                 ),
@@ -142,8 +143,8 @@ class _HomePageState extends State<HomePage> {
                                   child: Text(
                                     data['tipo'],
                                     style: TextStyle(
-                                      fontSize: 16.0,
-                                      color: Colors.green,
+                                      fontSize: 20.0,
+                                      color: Colors.white,
                                     ),
                                   ),
                                 ),
