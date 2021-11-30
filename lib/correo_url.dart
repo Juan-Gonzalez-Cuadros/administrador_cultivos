@@ -42,12 +42,17 @@ class _MailPageState extends State<MailPage> {
     return Form(
       key: _formKey,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           TextFormField(
             controller: emailController,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               hintText: 'Contacto',
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(width: 3, color: Colors.grey),
+                borderRadius: BorderRadius.circular(15),
+              ),
             ),
             validator: (String? value) {
               if (value == null || value.isEmpty) {
@@ -58,8 +63,12 @@ class _MailPageState extends State<MailPage> {
           ),
           TextFormField(
             controller: emailController2,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               hintText: 'Asunto',
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(width: 3, color: Colors.grey),
+                borderRadius: BorderRadius.circular(15),
+              ),
             ),
             validator: (String? value) {
               if (value == null || value.isEmpty) {
@@ -70,8 +79,12 @@ class _MailPageState extends State<MailPage> {
           ),
           TextFormField(
             controller: emailController3,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               hintText: 'Mensaje',
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(width: 3, color: Colors.grey),
+                borderRadius: BorderRadius.circular(15),
+              ),
             ),
             validator: (String? value) {
               if (value == null || value.isEmpty) {
@@ -81,30 +94,29 @@ class _MailPageState extends State<MailPage> {
             },
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: ElevatedButton(
-              onPressed: () {
-                launch(('mailto:' +
-                    emailController.text +
-                    '?subject=' +
-                    emailController2.text +
-                    '&body=' +
-                    emailController3.text));
-                // Validate will return true if the form is valid, or false if
-                // the form is invalid.
-                /*if (_formKey.currentState!.validate()) {
-                  // Process data.
-                  //print(emailController.text);
-                  Utils.openEmail(
-                    toEmail: emailController.text,
-                    subject: emailController2.text,
-                    body: emailController3.text,
-                  );
-                }*/
-              },
-              child: const Text('Abrir Email'),
-            ),
-          ),
+              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      launch(('mailto:' +
+                          emailController.text +
+                          '?subject=' +
+                          emailController2.text +
+                          '&body=' +
+                          emailController3.text));
+                    },
+                    style: ElevatedButton.styleFrom(
+                        primary: Colors.lightGreen,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20))),
+                    child: const Text('Abrir Email'),
+                  ),
+                ],
+              )),
         ],
       ),
     );
