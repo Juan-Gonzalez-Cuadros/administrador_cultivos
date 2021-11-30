@@ -89,30 +89,38 @@ class SignUpPage extends StatelessWidget {
               child: Text("Iniciar sesión"),
             ),
           ]),
-      body: Column(
-        children: [
-          TextField(
-            controller: emailController,
-            decoration: InputDecoration(
-              labelText: "Email",
-            ),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("lib/img/tree-picture.png"),
+            fit: BoxFit.cover,
           ),
-          TextField(
-            controller: passwordController,
-            decoration: InputDecoration(
-              labelText: "Password",
+        ),
+        child: Column(
+          children: [
+            TextField(
+              controller: emailController,
+              decoration: InputDecoration(
+                labelText: "Email",
+              ),
             ),
-          ),
-          RaisedButton(
-            onPressed: () {
-              context.read<AuthenticationService>().signUp(
-                    email: emailController.text.trim(),
-                    password: passwordController.text.trim(),
-                  );
-            },
-            child: Text("Registrarse"),
-          )
-        ],
+            TextField(
+              controller: passwordController,
+              decoration: InputDecoration(
+                labelText: "Password",
+              ),
+            ),
+            RaisedButton(
+              onPressed: () {
+                context.read<AuthenticationService>().signUp(
+                      email: emailController.text.trim(),
+                      password: passwordController.text.trim(),
+                    );
+              },
+              child: Text("Registrarse"),
+            )
+          ],
+        ),
       ),
     );
   }
