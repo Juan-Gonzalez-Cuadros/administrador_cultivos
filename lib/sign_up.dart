@@ -137,53 +137,61 @@ class SignUpPage extends StatelessWidget {
               ]),
         ]),
       ),
-      body: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              width: 300.0,
-              child: TextField(
-                controller: emailController,
-                decoration: InputDecoration(
-                  labelText: "Email",
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(width: 3, color: Colors.grey),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                ),
-              ),
-            ),
-            Container(
-              width: 300.0,
-              child: TextField(
-                controller: passwordController,
-                decoration: InputDecoration(
-                  labelText: "Password",
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(width: 3, color: Colors.grey),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                ),
-              ),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                context.read<AuthenticationService>().signUp(
-                      email: emailController.text.trim(),
-                      password: passwordController.text.trim(),
-                    );
-              },
-              style: ElevatedButton.styleFrom(
-                  primary: Colors.lightGreen,
-                  padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20))),
-              child: Text("Registrarse"),
-            )
-          ],
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("lib/img/tree-picture.png"),
+            fit: BoxFit.cover,
+          ),
         ),
-      ]),
+        child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                width: 300.0,
+                child: TextField(
+                  controller: emailController,
+                  decoration: InputDecoration(
+                    labelText: "Email",
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(width: 3, color: Colors.grey),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                width: 300.0,
+                child: TextField(
+                  controller: passwordController,
+                  decoration: InputDecoration(
+                    labelText: "Password",
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(width: 3, color: Colors.grey),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                  ),
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  context.read<AuthenticationService>().signUp(
+                        email: emailController.text.trim(),
+                        password: passwordController.text.trim(),
+                      );
+                },
+                style: ElevatedButton.styleFrom(
+                    primary: Colors.lightGreen,
+                    padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20))),
+                child: Text("Registrarse"),
+              )
+            ],
+          ),
+        ]),
+      ),
     );
   }
 }
