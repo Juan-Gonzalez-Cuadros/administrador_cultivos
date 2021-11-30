@@ -39,6 +39,10 @@ class _TreeImageState extends State<TreeImage> {
             controller: tipoController,
             decoration: InputDecoration(
               labelText: "Tipo de cultivo",
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(width: 3, color: Colors.grey),
+                borderRadius: BorderRadius.circular(15),
+              ),
             ),
           ),
         ),
@@ -69,8 +73,13 @@ class _TreeImageState extends State<TreeImage> {
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: RaisedButton(
+          child: ElevatedButton(
             child: Text("Añadir"),
+            style: ElevatedButton.styleFrom(
+                primary: Colors.green,
+                padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20))),
             onPressed: () {
               context.read<CollectioManager>().agregarArbol(
                   tipo: tipoController.text.trim(), img: imageUrl!);
