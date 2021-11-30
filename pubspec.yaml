@@ -35,4 +35,7 @@ flutter:
 
   uses-material-design: true
 
+  assets:
+   - lib/img/sheets-picture.jpg
+   - lib/img/tree-picture.png
   

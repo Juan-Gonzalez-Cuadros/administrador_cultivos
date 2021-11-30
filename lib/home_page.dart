@@ -91,61 +91,69 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-        body: StreamBuilder(
-          stream: firebase.snapshots(),
-          builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-            if (!snapshot.hasData) {
-              return Center(
-                child: CircularProgressIndicator(
-                  color: Colors.green,
-                ),
-              );
-            }
+        body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("lib/img/sheets-picture.jpg"),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: StreamBuilder(
+            stream: firebase.snapshots(),
+            builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              if (!snapshot.hasData) {
+                return Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.green,
+                  ),
+                );
+              }
 
-            return GridView.count(
-              crossAxisCount: 3,
-              children: snapshot.data!.docs.map((data) {
-                return GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Detalles(data: data)));
-                    },
-                    child: Card(
-                      elevation: 15.0,
-                      margin: EdgeInsets.all(2.0),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25.0)),
-                      child: Align(
-                          alignment: Alignment.center,
-                          child: Column(
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.all(1.0),
-                                child: Image.network(
-                                  data['img'],
-                                  height: 100.0,
-                                  width: 100.0,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.all(1.0),
-                                child: Text(
-                                  data['tipo'],
-                                  style: TextStyle(
-                                    fontSize: 16.0,
-                                    color: Colors.green,
+              return GridView.count(
+                crossAxisCount: 3,
+                children: snapshot.data!.docs.map((data) {
+                  return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Detalles(data: data)));
+                      },
+                      child: Card(
+                        elevation: 15.0,
+                        margin: EdgeInsets.all(2.0),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25.0)),
+                        child: Align(
+                            alignment: Alignment.center,
+                            child: Column(
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.all(1.0),
+                                  child: Image.network(
+                                    data['img'],
+                                    height: 100.0,
+                                    width: 100.0,
+                                    fit: BoxFit.cover,
                                   ),
                                 ),
-                              ),
-                            ],
-                          )),
-                    ));
-              }).toList(),
-            );
-          },
+                                Padding(
+                                  padding: EdgeInsets.all(1.0),
+                                  child: Text(
+                                    data['tipo'],
+                                    style: TextStyle(
+                                      fontSize: 16.0,
+                                      color: Colors.green,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )),
+                      ));
+                }).toList(),
+              );
+            },
+          ),
         ));
   }
 }
