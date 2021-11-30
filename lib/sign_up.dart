@@ -150,6 +150,7 @@ class SignUpPage extends StatelessWidget {
             children: [
               Container(
                 width: 300.0,
+                color: Colors.white,
                 child: TextField(
                   controller: emailController,
                   decoration: InputDecoration(
@@ -163,6 +164,7 @@ class SignUpPage extends StatelessWidget {
               ),
               Container(
                 width: 300.0,
+                color: Colors.white,
                 child: TextField(
                   controller: passwordController,
                   decoration: InputDecoration(
