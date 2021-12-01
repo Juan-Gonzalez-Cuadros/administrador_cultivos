@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.administrador_cultivos">
    <application
-        android:label="administrador_cultivos"
-        android:icon="@mipmap/ic_launcher">
+        android:label="Administrador Cultivos"
+        android:icon="@mipmap/iconstree">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
