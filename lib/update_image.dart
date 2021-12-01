@@ -37,80 +37,84 @@ class _UpdateTreeImageState extends State<UpdateTreeImage> {
     TextEditingController tipoController =
         TextEditingController(text: widget.data['tipo'].toString());
 
-    return Column(
-      children: [
-        Padding(
-          padding: EdgeInsets.all(8.0),
-          child: TextFormField(
-            controller: estadoController,
-            decoration: InputDecoration(
-              labelText: "Estado",
+    return SingleChildScrollView(
+        padding: EdgeInsets.all(32),
+        reverse: true,
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: TextFormField(
+                controller: estadoController,
+                decoration: InputDecoration(
+                  labelText: "Estado",
+                ),
+              ),
             ),
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.all(8.0),
-          child: TextFormField(
-            controller: abonoController,
-            decoration: InputDecoration(
-              labelText: "Abono",
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: TextFormField(
+                controller: abonoController,
+                decoration: InputDecoration(
+                  labelText: "Abono",
+                ),
+              ),
             ),
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.all(8.0),
-          child: TextFormField(
-            controller: plagaController,
-            decoration: InputDecoration(
-              labelText: "Plaga",
+            Padding(
+              padding: EdgeInsets.all(8.0),
+              child: TextFormField(
+                controller: plagaController,
+                decoration: InputDecoration(
+                  labelText: "Plaga",
+                ),
+              ),
             ),
-          ),
-        ),
-        if (imageUrl == null)
-          Icon(Icons.image, size: 60, color: Theme.of(context).primaryColor),
-        if (imageUrl != null)
-          InkWell(
-            splashColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            onTap: () => _selectPhoto(),
-            child: AppRoundImage.url(
-              widget.data['img'].toString(),
-              width: 80,
-              height: 80,
+            if (imageUrl == null)
+              Icon(Icons.image,
+                  size: 60, color: Theme.of(context).primaryColor),
+            if (imageUrl != null)
+              InkWell(
+                splashColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onTap: () => _selectPhoto(),
+                child: AppRoundImage.url(
+                  widget.data['img'].toString(),
+                  width: 80,
+                  height: 80,
+                ),
+              ),
+            InkWell(
+              onTap: () => _selectPhoto(),
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text(
+                  'Cambiar imagen',
+                  style: TextStyle(
+                      color: Theme.of(context).primaryColor,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
             ),
-          ),
-        InkWell(
-          onTap: () => _selectPhoto(),
-          child: Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text(
-              'Cambiar imagen',
-              style: TextStyle(
-                  color: Theme.of(context).primaryColor,
-                  fontWeight: FontWeight.bold),
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: RaisedButton(
-            child: Text("Actualizar"),
-            onPressed: () {
-              if (imageUrl == '') imageUrl = widget.data['img'];
-              context.read<CollectioManager>().actualizarArbol(
-                    id: widget.data['id'].toString(),
-                    estado: estadoController.text,
-                    abono: abonoController.text,
-                    plaga: plagaController.text,
-                    img: imageUrl!,
-                    tipo: tipoController.text,
-                  );
-              Navigator.pop(context);
-            },
-          ),
-        )
-      ],
-    );
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: RaisedButton(
+                child: Text("Actualizar"),
+                onPressed: () {
+                  if (imageUrl == '') imageUrl = widget.data['img'];
+                  context.read<CollectioManager>().actualizarArbol(
+                        id: widget.data['id'].toString(),
+                        estado: estadoController.text,
+                        abono: abonoController.text,
+                        plaga: plagaController.text,
+                        img: imageUrl!,
+                        tipo: tipoController.text,
+                      );
+                  Navigator.pop(context);
+                },
+              ),
+            )
+          ],
+        ));
   }
 
   Future _selectPhoto() async {

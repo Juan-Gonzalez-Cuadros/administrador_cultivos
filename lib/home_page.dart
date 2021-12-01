@@ -25,6 +25,7 @@ class _HomePageState extends State<HomePage> {
     final _formKey = GlobalKey<FormState>();
 
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text("Lista de Cultivos"),
           backgroundColor: Colors.green,
@@ -129,14 +130,14 @@ class _HomePageState extends State<HomePage> {
                             alignment: Alignment.center,
                             child: Column(
                               children: <Widget>[
-                                Padding(
-                                  padding: EdgeInsets.all(1.0),
+                                AspectRatio(
                                   child: Image.network(
                                     data['img'],
                                     height: 100.0,
                                     width: 125.0,
                                     fit: BoxFit.cover,
                                   ),
+                                  aspectRatio: 2 / 1,
                                 ),
                                 Padding(
                                   padding: EdgeInsets.all(1.0),
