@@ -23,7 +23,14 @@ dependencies:
   path_provider: ^2.0.7
   flutter_image_compress: ^1.1.0
   image_cropper: ^1.4.1
-  flutter_svg: ^0.23.0+1
+  #flutter_svg: ^0.23.0+1
+  flutter_launcher_icons: "^0.9.0"
+
+flutter_icons:
+  Ios: true
+  android: 'iconstree'
+  image_path: 'lib/img/icon/iconstree.png'
+  #adaptive_icon_background: 'lib/img/icon/iconsTree.png'
 
 dev_dependencies:
   flutter_test:
@@ -38,4 +45,5 @@ flutter:
   assets:
    - lib/img/sheets-picture.jpg
    - lib/img/tree-picture.png
+   - lib/img/icon/iconstree.png
   
